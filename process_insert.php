@@ -1,12 +1,12 @@
 <?php
 require 'connection.php';
 
-if (isset($_GET['name']) && isset($_GET['email'])) {
+if (isset($_POST['name']) && isset($_POST['email'])) {
     $connection = new Connection();
 
     $data = [
-        'name' => $_GET['name'],
-        'email' => $_GET['email']
+        'name' => $_POST['name'],
+        'email' => $_POST['email']
     ];
 
     $table = 'users';
