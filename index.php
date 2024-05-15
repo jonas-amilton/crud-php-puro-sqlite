@@ -14,19 +14,30 @@ $users = $connection->query("SELECT * FROM users");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
-    <nav class="navbar bg-primary">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1 text-white">Home</span>
-            <a href="/inserir.php" style="color: #fff;">Inserir novo usuário</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href='/pages/inserir.php'>Inserir novo usuário</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <div class="container-fluid d-flex justify-content-center">
-        <table class="table w-75">
+    <div class="container mt-4">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -37,20 +48,19 @@ $users = $connection->query("SELECT * FROM users");
             </thead>
             <tbody>
                 <?php foreach ($users as $user) : ?>
-                    <tr>
-                        <th scope="row"><?= $user->id; ?></th>
-                        <td><?= $user->name; ?></td>
-                        <td><?= $user->email; ?></td>
-                        <td>
-                            <a href='#'>Editar</a>
-                            <a href='#'>Excluir</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td><?= $user->id; ?></td>
+                    <td><?= $user->name; ?></td>
+                    <td><?= $user->email; ?></td>
+                    <td>
+                        <a href='pages/editar?i=<?= $user->id; ?>' class="btn btn-primary btn-sm">Editar</a>
+                        <a href='#' class="btn btn-danger btn-sm">Excluir</a>
+                    </td>
+                </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-
 </body>
 
 </html>
