@@ -1,7 +1,7 @@
 <?php
 
-class Connection {
-
+class Connection
+{
     private $databaseFile;
     private $connection;
 
@@ -23,10 +23,23 @@ class Connection {
 
     public function query($query)
     {
-        $result      = $this->getConnection()->query($query);
-
+        $result = $this->getConnection()->query($query);
         $result->setFetchMode(PDO::FETCH_INTO, new stdClass);
-
         return $result;
+    }
+
+    public function insert($table, $data)
+    {
+        $columns = implode(", ", array_keys($data));
+        $placeholders = ":" . implode(", :", array_keys($data));
+
+        $sql = "INSERT INTO {$table} ({$columns}) VALUES ({$placeholders})";
+        $stmt = $this->getConnection()->prepare($sql);
+
+        foreach ($data as $key => $value) {
+            $stmt->bindValue(":$key", $value);
+        }
+
+        return $stmt->execute();
     }
 }
