@@ -53,7 +53,8 @@ $users = $connection->query("SELECT * FROM users");
                     <td><?= $user->name; ?></td>
                     <td><?= $user->email; ?></td>
                     <td>
-                        <a href='pages/editar?i=<?= $user->id; ?>' class="btn btn-primary btn-sm">Editar</a>
+                        <a type="submit" href="/pages/editar.php?id=<?= $user->id; ?>"
+                            class="btn btn-primary btn-sm">Editar</a>
                         <a href='#' class="btn btn-danger btn-sm">Excluir</a>
                     </td>
                 </tr>
