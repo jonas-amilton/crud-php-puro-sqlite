@@ -9,9 +9,7 @@ if (isset($_POST['name']) && isset($_POST['email'])) {
         'email' => $_POST['email']
     ];
 
-    $table = 'users';
-
-    if ($connection->insert($table, $data)) {
+    if ($connection->insert('users', $data)) {
         echo "Dados inseridos com sucesso.";
 
         header("Location: index.php");
