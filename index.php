@@ -18,7 +18,7 @@ $users = $connection->query("SELECT * FROM users");
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="bg-dark-subtle">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="#">Home</a>
@@ -53,9 +53,8 @@ $users = $connection->query("SELECT * FROM users");
                     <td><?= $user->name; ?></td>
                     <td><?= $user->email; ?></td>
                     <td>
-                        <a type="submit" href="/pages/editar.php?id=<?= $user->id; ?>"
-                            class="btn btn-primary btn-sm">Editar</a>
-                        <a href='#' class="btn btn-danger btn-sm">Excluir</a>
+                        <a href="/pages/editar.php?id=<?= $user->id; ?>" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="/process_delete.php?id=<?= $user->id; ?>" class="btn btn-danger btn-sm">Excluir</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>
