@@ -1,28 +1,15 @@
 <?php
 
 require 'connection.php';
+include_once('./models/Cor.php');
+
+
 
 $connection = new Connection();
+// injeção de dependência
+$modelCor = new Cor($connection);
 
 $users = $connection->query("SELECT * FROM users");
-
-function getColors($id)
-{
-    $connection = new Connection();
-
-    $query = "
-    SELECT colors.name 
-    FROM user_colors 
-    INNER JOIN colors ON user_colors.color_id = colors.id 
-    WHERE user_colors.user_id = $id
-";
-
-    $result = $connection->query($query);
-
-    foreach ($result as $row) {
-        echo ' - ' . $row->name;
-    }
-}
 ?>
 
 <?php
@@ -50,7 +37,7 @@ include_once("./layouts/_header.php");
                 <td><?= $user->id; ?></td>
                 <td><?= $user->name; ?></td>
                 <td><?= $user->email; ?></td>
-                <td><?= getColors($user->id); ?></td>
+                <td><?= $modelCor->getColorsById($user->id); ?></td>
                 <td>
                     <a href="/pages/editar.php?id=<?= $user->id; ?>" class="btn btn-primary btn-sm"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
