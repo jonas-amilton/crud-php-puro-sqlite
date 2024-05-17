@@ -1,15 +1,15 @@
 <?php
 
 require 'connection.php';
-include_once('./models/Cor.php');
-
+include_once('./models/Color.php');
+include_once('./models/User.php');
 
 
 $connection = new Connection();
 // injeção de dependência
-$modelCor = new Cor($connection);
+$modelColor = new Color($connection);
+$modelUser = new User($connection);
 
-$users = $connection->query("SELECT * FROM users");
 ?>
 
 <?php
@@ -32,12 +32,12 @@ include_once("./layouts/_header.php");
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($users as $user) : ?>
+            <?php foreach ($modelUser->getUsers() as $user) : ?>
             <tr>
                 <td><?= $user->id; ?></td>
                 <td><?= $user->name; ?></td>
                 <td><?= $user->email; ?></td>
-                <td><?= $modelCor->getColorsById($user->id); ?></td>
+                <td><?= $modelColor->getColorsByIdUser($user->id); ?></td>
                 <td>
                     <a href="/pages/editar.php?id=<?= $user->id; ?>" class="btn btn-primary btn-sm"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
