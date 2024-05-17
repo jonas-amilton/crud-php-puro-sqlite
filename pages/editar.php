@@ -1,14 +1,14 @@
 <?php
 require 'connection.php';
 
+$userId = $_GET['id'] ?? '';
 
-if (isset($_GET['id'])) {
+
+if (isset($userId)) {
     $connection = new Connection();
 
-    $id = $_GET['id'];
-
     $query = $connection->prepare("SELECT * FROM users WHERE id = :id");
-    $query->bindParam(':id', $id, PDO::PARAM_INT);
+    $query->bindParam(':id', $userId, PDO::PARAM_INT);
     $query->execute();
 
     $user = $query->fetch(PDO::FETCH_OBJ);
@@ -16,6 +16,9 @@ if (isset($_GET['id'])) {
     echo "ID de usuário não fornecido.";
     exit;
 }
+
+$colors = $connection->query("SELECT * FROM colors");
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +35,7 @@ if (isset($_GET['id'])) {
 <body class="bg-dark-subtle">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="#">Home</a>
+            <a class="navbar-brand" href="#">Usuário(a) <?= $user->name; ?></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -52,7 +55,7 @@ if (isset($_GET['id'])) {
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Editar usuário</h5>
+                        <h5 class="card-title text-center">Editar</h5>
                         <form action="/process_update.php" method="post">
                             <input type="hidden" name="id" value="<?= $user->id; ?>">
                             <div class="mb-3">
@@ -64,6 +67,28 @@ if (isset($_GET['id'])) {
                                 <label for="email" class="form-label">E-mail</label>
                                 <input type="email" class="form-control" id="email" name="email"
                                     value="<?= $user->email; ?>" required>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Vincular cor</h5>
+                        <form action="/process_insert.php" method="post">
+                            <div class="mb-3">
+                                <input value="<?= $userId; ?>" hidden type="text" name="user_id">
+                                <select name="color_id" class="form-select" aria-label="default select example"
+                                    onchange="submitForm()">
+                                    <option value="n/a" selected>Escolha uma opção</option>
+                                    <?php foreach ($colors as $color) : ?>
+                                    <option value="<?= $color->id; ?>"><?= $color->name; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Enviar</button>
