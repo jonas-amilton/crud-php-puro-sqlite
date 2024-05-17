@@ -1,6 +1,6 @@
 <?php
 
-class Cor
+class Color
 {
     private $connection;
 
@@ -9,7 +9,7 @@ class Cor
         $this->connection = $connection;
     }
 
-    public function getColorsById($id)
+    public function getColorsByIdUser($id)
     {
         $query = "
             SELECT colors.name 
