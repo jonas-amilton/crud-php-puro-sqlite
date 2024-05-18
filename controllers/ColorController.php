@@ -10,7 +10,10 @@ class ColorController
             $userId = $_POST['user_id'];
             $colorId = $_POST['color_id'];
 
-            if ($modelColor->insert($userId, $colorId)) {
+            $modelColor->setUserId($userId);
+            $modelColor->setColorId($colorId);
+
+            if ($modelColor->insert()) {
                 echo "Dados inseridos com sucesso.";
                 header("Location: index.php");
                 die();

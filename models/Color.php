@@ -3,6 +3,9 @@ require_once './connection.php';
 
 class Color
 {
+    private $colorId;
+    private $userId;
+
     public function __construct()
     {
     }
@@ -52,20 +55,30 @@ class Color
         }
     }
 
-    public function insert($userId, $colorId)
+    public function insert()
     {
         try {
             $connection = new Connection();
 
             $sql = "INSERT INTO user_colors (user_id, color_id) VALUES (:user_id, :color_id)";
             $stmt = $connection->getConnection()->prepare($sql);
-            $stmt->bindValue(":user_id", $userId);
-            $stmt->bindValue(":color_id", $colorId);
+            $stmt->bindValue(":user_id", $this->userId);
+            $stmt->bindValue(":color_id", $this->colorId);
 
             return $stmt->execute();
         } catch (PDOException $e) {
             echo "Erro ao vicular cor à usuário: " . $e->getMessage();
             return false;
         }
+    }
+
+    public function setColorId($colorId)
+    {
+        $this->colorId = $colorId;
+    }
+
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
     }
 }
