@@ -58,4 +58,23 @@ class User
             return false;
         }
     }
+
+    public function update($name, $email, $id)
+    {
+        try {
+            $connection = new Connection();
+
+            $sql = "UPDATE users SET name = :name, email = :email WHERE id = :id";
+            $stmt = $connection->getConnection()->prepare($sql);
+
+            $stmt->bindValue(":name", $name);
+            $stmt->bindValue(":email", $email);
+            $stmt->bindValue(":id", $id);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erro ao atualizar usuário: " . $e->getMessage();
+            return false;
+        }
+    }
 }

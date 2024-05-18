@@ -32,18 +32,4 @@ class Connection
     {
         return $this->getConnection()->prepare($query);
     }
-
-    public function update($table, $data, $condition)
-    {
-        $setClause = implode(", ", array_map(fn ($key) => "$key = :$key", array_keys($data)));
-
-        $sql = "UPDATE {$table} SET {$setClause} WHERE {$condition}";
-        $stmt = $this->getConnection()->prepare($sql);
-
-        foreach ($data as $key => $value) {
-            $stmt->bindValue(":$key", $value);
-        }
-
-        return $stmt->execute();
-    }
 }
