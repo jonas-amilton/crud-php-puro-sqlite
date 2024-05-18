@@ -1,9 +1,4 @@
 <?php
-require 'connection.php';
-$connection = new Connection();
-?>
-
-<?php
 $title = "Editar usuário";
 $href = "/index.php";
 $textoHref = "Visualizar usuários";
