@@ -12,14 +12,11 @@ include_once("./layouts/_header.php");
         <?php
         $action = '/process_update.php';
         $titulo = 'Editar';
-        $userId = $_GET['id'] ?? '';
 
         include_once('./layouts/_form_usuario.php');
         ?>
 
         <?php
-        $userId = $_GET['id'] ?? '';
-
         include_once('./layouts/_form_cor.php');
         ?>
 

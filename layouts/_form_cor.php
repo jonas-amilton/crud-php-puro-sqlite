@@ -10,7 +10,7 @@ $modelColor = new Color();
             <h5 class="card-title text-center">Vincular cor</h5>
             <form action="/process_insert.php" method="post">
                 <div class="mb-3">
-                    <input value="<?= $userId; ?>" hidden type="text" name="user_id">
+                    <input value="<?= $_POST['id']; ?>" hidden type="text" name="user_id">
                     <select name="color_id" class="form-select" aria-label="default select example">
                         <option value="n/a" selected>Escolha uma opção</option>
                         <?php foreach ($modelColor->getColors() as $color) : ?>
