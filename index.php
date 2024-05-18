@@ -1,15 +1,10 @@
 <?php
-
-require 'connection.php';
 include_once('./models/Color.php');
 include_once('./models/User.php');
 
 
-$connection = new Connection();
-// injeção de dependência
-$modelColor = new Color($connection);
-$modelUser = new User($connection);
-
+$modelColor = new Color();
+$modelUser = new User();
 ?>
 
 <?php
