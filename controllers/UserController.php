@@ -10,7 +10,10 @@ class UserController
             $name = $_POST['name'];
             $email = $_POST['email'];
 
-            if ($modelUser->insert($name, $email)) {
+            $modelUser->setName($name);
+            $modelUser->setEmail($email);
+
+            if ($modelUser->insert()) {
                 echo "Dados inseridos com sucesso.";
                 header("Location: index.php");
                 die();
@@ -30,7 +33,11 @@ class UserController
             $email = $_POST['email'];
             $id = $_POST['id'];
 
-            if ($modelUser->update($name, $email, $id)) {
+            $modelUser->setName($name);
+            $modelUser->setEmail($email);
+            $modelUser->setId($id);
+
+            if ($modelUser->update()) {
                 echo "Dados atualizados com sucesso.";
                 header("Location: index.php");
                 die();
@@ -48,7 +55,9 @@ class UserController
             $modelUser = new User();
             $id = $_GET['id'];
 
-            if ($modelUser->delete($id)) {
+            $modelUser->setId($id);
+
+            if ($modelUser->delete()) {
                 echo "Registro deletado com sucesso.";
                 header("Location: index.php");
                 die();

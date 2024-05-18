@@ -4,6 +4,9 @@ require_once './connection.php';
 
 class User
 {
+    private $name;
+    private $email;
+    private $id;
 
     public function __construct()
     {
@@ -25,15 +28,15 @@ class User
         }
     }
 
-    public function insert($name, $email)
+    public function insert()
     {
         try {
             $connection = new Connection();
 
             $sql = "INSERT INTO users (name, email) VALUES (:name, :email)";
             $stmt = $connection->getConnection()->prepare($sql);
-            $stmt->bindValue(":name", $name);
-            $stmt->bindValue(":email", $email);
+            $stmt->bindValue(":name", $this->name);
+            $stmt->bindValue(":email", $this->email);
 
             return $stmt->execute();
         } catch (PDOException $e) {
@@ -42,13 +45,13 @@ class User
         }
     }
 
-    public function delete($id)
+    public function delete()
     {
         try {
             $connection = new Connection();
 
             $stmt = $connection->prepare("DELETE FROM users WHERE id = :id");
-            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+            $stmt->bindValue(":id", $this->id, PDO::PARAM_INT);
 
             $stmt->execute();
 
@@ -59,7 +62,7 @@ class User
         }
     }
 
-    public function update($name, $email, $id)
+    public function update()
     {
         try {
             $connection = new Connection();
@@ -67,14 +70,29 @@ class User
             $sql = "UPDATE users SET name = :name, email = :email WHERE id = :id";
             $stmt = $connection->getConnection()->prepare($sql);
 
-            $stmt->bindValue(":name", $name);
-            $stmt->bindValue(":email", $email);
-            $stmt->bindValue(":id", $id);
+            $stmt->bindValue(":name", $this->name);
+            $stmt->bindValue(":email", $this->email);
+            $stmt->bindValue(":id", $this->id);
 
             return $stmt->execute();
         } catch (PDOException $e) {
             echo "Erro ao atualizar usuário: " . $e->getMessage();
             return false;
         }
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 }
