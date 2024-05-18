@@ -1,3 +1,9 @@
+<?php
+include_once('./models/Color.php');
+
+$modelColor = new Color();
+?>
+
 <div class="col-md-6">
     <div class="card">
         <div class="card-body">
@@ -5,11 +11,10 @@
             <form action="/process_insert.php" method="post">
                 <div class="mb-3">
                     <input value="<?= $userId; ?>" hidden type="text" name="user_id">
-                    <select name="color_id" class="form-select" aria-label="default select example"
-                        onchange="submitForm()">
+                    <select name="color_id" class="form-select" aria-label="default select example">
                         <option value="n/a" selected>Escolha uma opção</option>
-                        <?php foreach ($colors as $color) : ?>
-                        <option value="<?= $color->id; ?>"><?= $color->name; ?></option>
+                        <?php foreach ($modelColor->getColors() as $color) : ?>
+                            <option value="<?= $color->id; ?>"><?= $color->name; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
