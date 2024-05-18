@@ -33,21 +33,6 @@ class Connection
         return $this->getConnection()->prepare($query);
     }
 
-    public function insert($table, $data)
-    {
-        $columns = implode(", ", array_keys($data));
-        $placeholders = ":" . implode(", :", array_keys($data));
-
-        $sql = "INSERT INTO {$table} ({$columns}) VALUES ({$placeholders})";
-        $stmt = $this->getConnection()->prepare($sql);
-
-        foreach ($data as $key => $value) {
-            $stmt->bindValue(":$key", $value);
-        }
-
-        return $stmt->execute();
-    }
-
     public function update($table, $data, $condition)
     {
         $setClause = implode(", ", array_map(fn ($key) => "$key = :$key", array_keys($data)));

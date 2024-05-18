@@ -1,5 +1,6 @@
 <?php
 require './models/User.php';
+require './models/Color.php';
 
 // insere usuário
 if (isset($_POST['name']) && isset($_POST['email'])) {
@@ -24,17 +25,12 @@ echo '<hr>';
 
 // vincula cor
 if (isset($_POST['color_id']) && isset($_POST['user_id'])) {
-    $connection = new Connection();
+    $modelColor = new Color();
 
+    $userId = $_POST['user_id'];
+    $colorId = $_POST['color_id'];
 
-    $userColors = [
-        'user_id' => $_POST['user_id'],
-        'color_id' => $_POST['color_id']
-    ];
-
-    // var_dump($userColors);
-
-    if ($connection->insert('user_colors', $userColors)) {
+    if ($modelColor->insert($userId, $colorId)) {
         echo "Dados inseridos com sucesso.";
 
         header("Location: index.php");
