@@ -1,24 +1,43 @@
 <?php
+require_once './Connection.php';
+
 
 class User
 {
-    private $connection;
 
-    public function __construct(Connection $connection)
+    public function __construct()
     {
-        $this->connection = $connection;
     }
 
     public function getUsers()
     {
         try {
+            $connection = new Connection();
+
             $query = "SELECT * FROM users";
 
-            $result = $this->connection->getConnection()->query($query);
+            $result = $connection->getConnection()->query($query);
             $result->setFetchMode(PDO::FETCH_INTO, new stdClass);
             return $result;
         } catch (PDOException $e) {
             echo "Erro ao executar a consulta: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function insert($name, $email)
+    {
+        try {
+            $connection = new Connection();
+
+            $sql = "INSERT INTO users (name, email) VALUES (:name, :email)";
+            $stmt = $connection->getConnection()->prepare($sql);
+            $stmt->bindValue(":name", $name);
+            $stmt->bindValue(":email", $email);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erro ao inserir usuário: " . $e->getMessage();
             return false;
         }
     }
