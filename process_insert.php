@@ -1,18 +1,14 @@
 <?php
-require 'connection.php';
+require './models/User.php';
 
 // insere usuário
 if (isset($_POST['name']) && isset($_POST['email'])) {
-    $connection = new Connection();
+    $modelUser = new User();
 
-    $users = [
-        'name' => $_POST['name'],
-        'email' => $_POST['email']
-    ];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
 
-    // var_dump($users);
-
-    if ($connection->insert('users', $users)) {
+    if ($modelUser->insert($name, $email)) {
         echo "Dados inseridos com sucesso.";
 
         header("Location: index.php");
