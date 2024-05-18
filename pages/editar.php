@@ -1,6 +1,6 @@
 <?php
-$title = "Editar usuário";
-$href = "/index.php";
+$title = "Editar";
+$href = "../index.php";
 $textoHref = "Visualizar usuários";
 
 include_once("./layouts/_header.php");
@@ -10,8 +10,7 @@ include_once("./layouts/_header.php");
     <div class="row justify-content-center">
 
         <?php
-        $action = '/process_update.php';
-        $titulo = 'Editar';
+        $titulo = 'Editar usuário';
 
         include_once('./layouts/_form_usuario.php');
         ?>
