@@ -1,13 +1,6 @@
 <?php
 require 'connection.php';
 $connection = new Connection();
-
-
-$userId = $_GET['id'] ?? '';
-
-
-$colors = $connection->query("SELECT * FROM colors");
-
 ?>
 
 <?php
@@ -24,15 +17,13 @@ include_once("./layouts/_header.php");
         <?php
         $action = '/process_update.php';
         $titulo = 'Editar';
-        $userId = $userId;
+        $userId = $_GET['id'] ?? '';
 
         include_once('./layouts/_form_usuario.php');
         ?>
 
         <?php
-        $action = "/process_insert.php";
-        $userId = $userId;
-        $colors = $colors;
+        $userId = $_GET['id'] ?? '';
 
         include_once('./layouts/_form_cor.php');
         ?>
