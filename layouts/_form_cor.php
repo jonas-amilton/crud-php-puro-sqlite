@@ -8,7 +8,7 @@ $modelColor = new Color();
     <div class="card">
         <div class="card-body">
             <h5 class="card-title text-center">Vincular cor</h5>
-            <form action="/process_insert.php" method="post">
+            <form action="../index.php" method="post">
                 <div class="mb-3">
                     <input value="<?= $_POST['id']; ?>" hidden type="text" name="user_id">
                     <select name="color_id" class="form-select" aria-label="default select example">
