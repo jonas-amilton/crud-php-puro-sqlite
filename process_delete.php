@@ -1,16 +1,12 @@
 <?php
-require 'connection.php';
+require './models/User.php';
 
 if (isset($_GET['id'])) {
-    $connection = new Connection();
+    $modelUser = new User();
 
     $id = $_GET['id'];
-    $condition = "id = :id";
 
-    $stmt = $connection->prepare("DELETE FROM users WHERE $condition");
-    $stmt->bindValue(":id", $id, PDO::PARAM_INT);
-
-    if ($stmt->execute()) {
+    if ($modelUser->delete($id)) {
         echo "Registro deletado com sucesso.";
         header("Location: index.php");
         die();

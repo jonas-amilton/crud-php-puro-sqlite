@@ -41,4 +41,21 @@ class User
             return false;
         }
     }
+
+    public function delete($id)
+    {
+        try {
+            $connection = new Connection();
+
+            $stmt = $connection->prepare("DELETE FROM users WHERE id = :id");
+            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            echo "Erro ao deletar usuário: " . $e->getMessage();
+            return false;
+        }
+    }
 }

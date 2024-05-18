@@ -46,11 +46,4 @@ class Connection
 
         return $stmt->execute();
     }
-
-    public function delete($table, $condition)
-    {
-        $sql = "DELETE FROM {$table} WHERE {$condition}";
-        $stmt = $this->getConnection()->prepare($sql);
-        return $stmt->execute();
-    }
 }
