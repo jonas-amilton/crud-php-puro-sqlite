@@ -15,10 +15,6 @@ include_once("./frontend/views/layouts/_header.php");
         include_once('./frontend/views/layouts/_form_usuario.php');
         ?>
 
-        <?php
-        include_once('./frontend/views/layouts/_form_cor.php');
-        ?>
-
     </div>
 </div>
 </body>
