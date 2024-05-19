@@ -12,6 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $userController->insertUser();
     } elseif (isset($_POST['color_id']) && isset($_POST['user_id'])) {
         $colorController->linkColor();
+    } elseif (isset($_POST['userId']) && isset($_POST['colorId'])) {
+        $colorController->deleteColor();
     } else {
         echo "Dados obrigatórios não foram fornecidos.";
     }
