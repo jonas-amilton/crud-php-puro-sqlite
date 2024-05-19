@@ -15,7 +15,7 @@ class Color
         try {
             $connection = new Connection();
             $query = "
-            SELECT * 
+            SELECT DISTINCT colors.name, user_colors.color_id, user_colors.user_id
             FROM user_colors 
             INNER JOIN colors ON user_colors.color_id = colors.id 
             WHERE user_colors.user_id = :id
