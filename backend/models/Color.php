@@ -25,12 +25,7 @@ class Color
             $statement->bindParam(':id', $id, PDO::PARAM_INT);
             $statement->execute();
 
-            $colors = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-            $result = '';
-            foreach ($colors as $color) {
-                $result = $result . ' - ' . $color['name'];
-            }
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             return $result;
         } catch (PDOException $e) {
