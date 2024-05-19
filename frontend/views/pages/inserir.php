@@ -1,6 +1,6 @@
 <?php
 $title = "Inserir";
-$href = __DIR__ . "/index.php";
+$href = "../../../index.php";
 $textoHref = "Visualizar usuários";
 
 include_once("./frontend/views/layouts/_header.php");
