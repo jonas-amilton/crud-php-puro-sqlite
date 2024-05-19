@@ -35,7 +35,7 @@ include_once("./frontend/views/layouts/_header.php");
                         <input type="hidden" name="id" value="<?= $user->id ?>">
                         <input type="hidden" name="name" value="<?= $user->name ?>">
                         <button type="submit" class="btn btn-secondary btn-sm">
-                            Vincular cores
+                            Gerenciar cores
                         </button>
                     </form>
                     <form action="/frontend/views/pages/editar.php" method="post">
