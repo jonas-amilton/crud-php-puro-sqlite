@@ -15,7 +15,7 @@ class Color
         try {
             $connection = new Connection();
             $query = "
-            SELECT colors.name 
+            SELECT * 
             FROM user_colors 
             INNER JOIN colors ON user_colors.color_id = colors.id 
             WHERE user_colors.user_id = :id
@@ -63,6 +63,25 @@ class Color
             return $stmt->execute();
         } catch (PDOException $e) {
             echo "Erro ao vicular cor à usuário: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function delete()
+    {
+        try {
+            $connection = new Connection();
+
+            $stmt = $connection->prepare("DELETE FROM user_colors
+            WHERE user_id = :user_id AND color_id = :color_id");
+            $stmt->bindValue(":user_id", $this->userId, PDO::PARAM_INT);
+            $stmt->bindValue(":color_id", $this->colorId, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            echo "Erro ao deletar usuário: " . $e->getMessage();
             return false;
         }
     }
