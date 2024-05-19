@@ -1,16 +1,16 @@
 <?php
 $title = "Inserir";
-$href = "../index.php";
+$href = __DIR__ . "/index.php";
 $textoHref = "Visualizar usuários";
 
-include_once("./layouts/_header.php");
+include_once("./frontend/views/layouts/_header.php");
 ?>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
         <?php
         $titulo = 'Inserir usuário';
-        include_once('./layouts/_form_usuario.php');
+        include_once('./frontend/views/layouts/_form_usuario.php');
         ?>
     </div>
 </div>

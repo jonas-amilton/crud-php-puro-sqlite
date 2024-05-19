@@ -1,6 +1,6 @@
 <?php
-require './controllers/UserController.php';
-require './controllers/ColorController.php';
+require './backend/controllers/UserController.php';
+require './backend/controllers/ColorController.php';
 
 $userController = new UserController();
 $colorController = new ColorController();

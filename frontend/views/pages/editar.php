@@ -1,9 +1,9 @@
 <?php
 $title = "Editar";
-$href = "../index.php";
+$href = __DIR__ . "/index.php";
 $textoHref = "Visualizar usuários";
 
-include_once("./layouts/_header.php");
+include_once("./frontend/views/layouts/_header.php");
 ?>
 
 <div class="container mt-5">
@@ -12,11 +12,11 @@ include_once("./layouts/_header.php");
         <?php
         $titulo = 'Editar usuário';
 
-        include_once('./layouts/_form_usuario.php');
+        include_once('./frontend/views/layouts/_form_usuario.php');
         ?>
 
         <?php
-        include_once('./layouts/_form_cor.php');
+        include_once('./frontend/views/layouts/_form_cor.php');
         ?>
 
     </div>

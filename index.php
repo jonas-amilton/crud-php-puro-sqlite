@@ -1,9 +1,8 @@
 <?php
 require './routes.php';
 
-include_once('./models/Color.php');
-include_once('./models/User.php');
-
+include_once('./backend/models/Color.php');
+include_once('./backend/models/User.php');
 
 $modelColor = new Color();
 $modelUser = new User();
@@ -11,10 +10,10 @@ $modelUser = new User();
 
 <?php
 $title = "Home";
-$href = "/pages/inserir.php";
+$href = "./frontend/views/pages/inserir.php";
 $textoHref = "Inserir novo usuário";
 
-include_once("./layouts/_header.php");
+include_once("./frontend/views/layouts/_header.php");
 ?>
 
 <div class="container mt-4">
@@ -36,7 +35,7 @@ include_once("./layouts/_header.php");
                 <td><?= $user->email; ?></td>
                 <td><?= $modelColor->getColorsByIdUser($user->id); ?></td>
                 <td>
-                    <form action="/pages/editar.php" method="post">
+                    <form action="/frontend/views/pages/editar.php" method="post">
                         <input type="hidden" name="name" value="<?= $user->name ?>">
                         <input type="hidden" name="email" value="<?= $user->email ?>">
                         <input type="hidden" name="id" value="<?= $user->id ?>">
@@ -50,7 +49,7 @@ include_once("./layouts/_header.php");
                             </svg>
                         </button>
                     </form>
-                    <a href="index.php?action=delete&id=<?= $user->id; ?>" class="btn btn-danger btn-sm">
+                    <a href='index.php?action=delete&id=<?= $user->id; ?>' class="btn btn-danger btn-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-trash-fill" viewBox="0 0 16 16">
                             <path
